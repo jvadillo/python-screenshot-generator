@@ -27,19 +27,16 @@ Define a function called `capture_screenshot()` that accepts a URL as input para
         # Launch headless Chrome browser
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
-            context = browser.newContext()
-            page = context.newPage()
+            page = browser.new_page()
             
             # Navigate to the URL
             page.goto(url)
             
             # Capture screenshot
-            screenshot_path = f"{os.getcwd()}/screenshot_{url}.png"
-            page.screenshot({ "path": screenshot_path })
+            screenshot_path = f"{os.getcwd()}/screenshot_a.png"
+            page.screenshot(path=screenshot_path)
             
             return screenshot_path
-
-` 
 
 ### Step 5: Upload captured screenshot to Cloudinary
 Inside the same function, use the `Cloudinary` library to upload the captured screenshot to Cloudinary. After successful upload, get the publicly accessible URL of the uploaded image and update it in the Supabase table created earlier.
